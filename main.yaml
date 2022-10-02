@@ -1,0 +1,19 @@
+Description: Simple stack EC2 + SG
+Resources: 
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: simple security group by CF
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0 
+  testEc2:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-09e67e426f25ce0d7"
+      InstanceType: t3.micro
+#      KeyName: String
+      SecurityGroupIds: 
+        - !Ref SecurityGroup
