@@ -17,16 +17,16 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-  create-stack:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - run:
-          name: "creating Stack ..."
-          command: "aws cloudformation create-stack --stack-name simpleec2-${CIRCLE_WORKFLOW_ID:0:5} --template-body file://main.yaml  --region=us-east-1"
+  # create-stack:
+  #   # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+  #   # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  #   docker:
+  #     - image: amazon/aws-cli
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "creating Stack ..."
+  #         command: "aws cloudformation create-stack --stack-name simpleec2-${CIRCLE_WORKFLOW_ID:0:5} --template-body file://main.yaml  --region=us-east-1"
   configure-infra:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -60,5 +60,5 @@ workflows:
   cloudFormation-workflow:
     jobs:
       - say-hello
-      - create-stack
+      # - create-stack
       - configure-infra
