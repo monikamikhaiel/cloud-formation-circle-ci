@@ -1,6 +1,6 @@
 Description: Simple stack EC2 + SG
 Resources: 
-  SecurityGroup:
+  SecurityGroupSG:
     Type: AWS::EC2::SecurityGroup
     Properties: 
       GroupDescription: simple security group by CF
@@ -9,10 +9,10 @@ Resources:
         FromPort: '22'
         ToPort: '22'
         CidrIp: 0.0.0.0/0 
-      - IpProtocol: http
-        FromPort: '3000'
-        ToPort: '3000'
-        CidrIp: 0.0.0.0/0         
+      # - IpProtocol: http
+      #   FromPort: '3000'
+      #   ToPort: '3000'
+      #   CidrIp: 0.0.0.0/0         
   testEc2:
     Type: AWS::EC2::Instance
     Properties: 
@@ -20,4 +20,4 @@ Resources:
       InstanceType: t3.micro
       KeyName: "monika-circleci-key"
       SecurityGroupIds: 
-        - !Ref SecurityGroup
+        - !Ref SecurityGroupSG
