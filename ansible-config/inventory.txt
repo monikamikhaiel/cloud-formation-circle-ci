@@ -1,2 +1,2 @@
 [all]
-44.201.32.49
+44.201.32.49  ansible_ssh_common_args='-o StrictHostKeyChecking=no'
