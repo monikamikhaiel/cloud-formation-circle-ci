@@ -1,0 +1,35 @@
+- name: "update apt packages"
+  become: true
+  apt:
+    update_cache: yes  
+- name: "upgrade packages"
+  become: true
+  apt:
+    upgrade: yes
+- name: "install dependencies, such as NodeJS and NPM"
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes # -g 
+    production: yes
+    state: present
+- name: "create a ~/web directory"
+  become: true
+  shell:
+    cmd: mkdir -p ~/web
+- name: "copy index test page from files/index.js to ~/web/index.js"
+  become: true
+  copy:
+    src: index.js
+    dest: ~/web  
+- name: "Start the weeb server using the command pm2 start ~/web/index.js -f"
+  become: true
+  shell:
+    cmd: pm2 start ~/web/index.js -f
+    chdir: ~/web

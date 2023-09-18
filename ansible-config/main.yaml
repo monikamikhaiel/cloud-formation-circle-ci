@@ -1,0 +1,5 @@
+- name: "configure web server"
+  become: true
+  hosts: all
+  roles:
+  - enhanced-webserver
